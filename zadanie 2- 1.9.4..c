@@ -70,13 +70,14 @@ main(){
 	int *memory;
 
 memory=malloc(3*sizeof(POINT)+2*sizeof(VECTOR)+sizeof(LINE));
-if (memory==NULL) printf("Malo pamate!");
 
 randomAB(&A,&B);
 pointC (&A,&B,&C);
 vectorAB (&A,&B,&v,&n);	
 
-if (point_point_axis(&A,&B,&C,&a,&v,&n)==1)
+if (point_point_axis(&A,&B,&C,&a,&v,&n)==1&& memory!=NULL)
        	printf("vypocet prebehol uspesne\n");
-   else printf("body A B sa rovnaju, vypocet zlyhal\n");
+   else printf(" vypocet zlyhal\n");
+   
+void free(void *memory);
 }
