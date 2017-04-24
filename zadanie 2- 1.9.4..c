@@ -44,9 +44,10 @@ char vectorAB (POINT *A, POINT *B, VECTOR *v,VECTOR *n){
 }
 
 char point_point_axis(POINT *A, POINT *B,POINT *C, LINE *a,VECTOR *v,VECTOR *n){
-	int c1,c2,vysledok;
+	int c1,c2,vysledok, *memory;
 	char t,x,y;
 
+memory=malloc(3*sizeof(POINT)+2*sizeof(VECTOR)+sizeof(LINE));
 	c1=-(A->x)*(n->x)-(A->y)*(n->y);
 	c2=-(C->x)*(v->x)-(C->y)*(v->y);	
 	a->x=(C->x)+(n->x)*t;
@@ -54,11 +55,14 @@ char point_point_axis(POINT *A, POINT *B,POINT *C, LINE *a,VECTOR *v,VECTOR *n){
 	a->vseob=(v->x)*x+(v->y)*y+c2;
 	a->smernica=((v->x)*x+c2)/-(v->y);
 
-    if ((A->x)==(B->x)&&(A->y)==(B->y))
+    if ((A->x)==(B->x)&&(A->y)==(B->y)&& memory!=NULL)
         vysledok=0;
       else vysledok=1;
   
 	return vysledok;
+void free (int *memory){
+	free(memory);
+}
 }
 
 
@@ -67,17 +71,14 @@ main(){
 	POINT A,B,C;
 	VECTOR v,n;
 	LINE a;
-	int *memory;
 
-memory=malloc(3*sizeof(POINT)+2*sizeof(VECTOR)+sizeof(LINE));
 
 randomAB(&A,&B);
 pointC (&A,&B,&C);
 vectorAB (&A,&B,&v,&n);	
 
-if (point_point_axis(&A,&B,&C,&a,&v,&n)==1&& memory!=NULL)
+if (point_point_axis(&A,&B,&C,&a,&v,&n)==1)
        	printf("vypocet prebehol uspesne\n");
    else printf(" vypocet zlyhal\n");
-   
-void free(void *memory);
+  
 }
