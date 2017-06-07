@@ -57,8 +57,9 @@ char point_point_axis(POINT *A, POINT *B, LINE *p)
 	POINT C;
 	VECTOR v,n;
 	
-	pointC (&A,&B,&C);
-	vectorAB (&A,&B,&v,&n);	
+	randomAB(A,B);
+	pointC (A,B,&C);
+	vectorAB (A,B,&v,&n);	
 	
 	p->a=(v.x);
 	p->b=(v.y);
@@ -69,8 +70,7 @@ char point_point_axis(POINT *A, POINT *B, LINE *p)
 	vseobecna=(p->a)*x+(p->b)*y+(p->c);
 	smernica=((p->a)*x+(p->c))/-(p->b);
 
-    if ((A->x)==(B->x)&&(A->y)==(B->y))
-        vysledok=0;
+    if ((A->x)==(B->x)&&(A->y)==(B->y));
       		else vysledok=1;
   
 	return vysledok;
@@ -81,7 +81,6 @@ main(){
 	POINT A,B;
 	LINE p;
 	
-	randomAB(&A,&B);
 
 	if (point_point_axis(&A,&B,&p)==1)
        	printf("vypocet prebehol uspesne\n");
