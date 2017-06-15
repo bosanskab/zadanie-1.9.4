@@ -22,7 +22,6 @@ typedef struct{
 
 void randomAB(POINT *A, POINT *B)
 {
-	
 	srand(time(NULL));
 	
 	A->x=-5+rand()%10;
@@ -53,6 +52,11 @@ char point_point_axis(POINT *A, POINT *B, LINE *p)
 {
 	POINT C;
 	VECTOR v,n;
+	int vysledok;
+	
+	if ((A->x)==(B->x)&&(A->y)==(B->y))
+		vysledok=0;
+		else vysledok=1;		
 	
 	pointC (A,B,&C);
 	vectorAB (A,B,&v,&n);	
@@ -60,7 +64,8 @@ char point_point_axis(POINT *A, POINT *B, LINE *p)
 	p->a=(v.x);
 	p->b=(v.y);
 	p->c=-((C.x)*(p->a)+(C.y)*(p->b));
-		
+	
+	return vysledok;
 }
 
 
@@ -70,17 +75,10 @@ main(){
 	int vysledok;
 	
 	randomAB(&A,&B);	
-	if ((A.x)==(B.x)&&(A.y)==(B.y))
-		vysledok=0;
-		else vysledok=1;
-	
-	if (vysledok==0){
-   		printf(" vypocet zlyhal\n");
-		return 0; 
-	}
 		
-   point_point_axis(&A,&B,&p);
+   if (point_point_axis(&A,&B,&p)==1)
        	printf("vypocet prebehol uspesne\n");
+       	else printf(" vypocet zlyhal\n");
    	
    	return 0;  
 }
