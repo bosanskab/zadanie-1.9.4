@@ -51,13 +51,9 @@ char vectorAB (POINT *A, POINT *B, VECTOR *v,VECTOR *n)
 
 char point_point_axis(POINT *A, POINT *B, LINE *p)
 {
-	float smernica,vseobecna,paramx,paramy;
-	int vysledok;
-	char t,x,y;
 	POINT C;
 	VECTOR v,n;
 	
-	randomAB(A,B);
 	pointC (A,B,&C);
 	vectorAB (A,B,&v,&n);	
 	
@@ -65,26 +61,26 @@ char point_point_axis(POINT *A, POINT *B, LINE *p)
 	p->b=(v.y);
 	p->c=-((C.x)*(p->a)+(C.y)*(p->b));
 		
-	paramx=(C.x)+(n.x)*t;
-	paramy=(C.y)+(n.y)*t;
-	vseobecna=(p->a)*x+(p->b)*y+(p->c);
-	smernica=((p->a)*x+(p->c))/-(p->b);
-
-    if ((A->x)==(B->x)&&(A->y)==(B->y));
-      		else vysledok=1;
-  
-	return vysledok;
 }
 
 
 main(){
 	POINT A,B;
 	LINE p;
+	int vysledok;
 	
-
-	if (point_point_axis(&A,&B,&p)==1)
+	randomAB(&A,&B);	
+	if ((A.x)==(B.x)&&(A.y)==(B.y))
+		vysledok=0;
+		else vysledok=1;
+	
+	if (vysledok==0){
+   		printf(" vypocet zlyhal\n");
+		return 0; 
+	}
+		
+   point_point_axis(&A,&B,&p);
        	printf("vypocet prebehol uspesne\n");
-   		else printf(" vypocet zlyhal\n");
-   
+   	
    	return 0;  
 }
